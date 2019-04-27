@@ -1,7 +1,8 @@
-package com.sevenpeakssoftware.khinthirisoe
+package com.sevenpeakssoftware.khinthirisoe.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.sevenpeakssoftware.khinthirisoe.R
 
 class MainActivity : AppCompatActivity() {
 
