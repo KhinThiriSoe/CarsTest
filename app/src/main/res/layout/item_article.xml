@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/img_car"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/image_height"
             android:adjustViewBounds="true"
             android:foreground="@drawable/gradient_background"
             android:scaleType="centerCrop"
@@ -27,7 +27,7 @@
             android:paddingLeft="@dimen/standard_margin"
             android:paddingRight="@dimen/standard_margin"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="@dimen/title_size"
             android:textStyle="bold"
             tools:text="Q7 - Greatness starts, when you don't stop." />
 
