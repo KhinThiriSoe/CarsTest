@@ -27,9 +27,8 @@ public class ArticleContent implements Parcelable {
     @Property(nameInDb = "image")
     private String url;
 
-    @Generated(hash = 769233686)
-    public ArticleContent(int id, String title, String datetime, String ingress,
-                          String url) {
+    @Generated(hash = 819763091)
+    public ArticleContent(int id, String title, String datetime, String ingress, String url) {
         this.id = id;
         this.title = title;
         this.datetime = datetime;
@@ -45,19 +44,19 @@ public class ArticleContent implements Parcelable {
         url = in.readString();
     }
 
-    @Generated(hash = 1626309535)
+    @Generated(hash = 949142728)
     public ArticleContent() {
     }
 
-    public static final Creator<CarsContent> CREATOR = new Creator<CarsContent>() {
+    public static final Creator<ArticleContent> CREATOR = new Creator<ArticleContent>() {
         @Override
-        public CarsContent createFromParcel(Parcel in) {
-            return new CarsContent(in);
+        public ArticleContent createFromParcel(Parcel in) {
+            return new ArticleContent(in);
         }
 
         @Override
-        public CarsContent[] newArray(int size) {
-            return new CarsContent[size];
+        public ArticleContent[] newArray(int size) {
+            return new ArticleContent[size];
         }
     };
 

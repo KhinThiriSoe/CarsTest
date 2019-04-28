@@ -1,15 +1,15 @@
 package com.sevenpeakssoftware.khinthirisoe.data.db
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
+import com.sevenpeakssoftware.khinthirisoe.data.db.model.DaoMaster
+import com.sevenpeakssoftware.khinthirisoe.data.db.model.DaoMaster.dropAllTables
 import org.greenrobot.greendao.database.Database
+import timber.log.Timber
 
 class DbOpenHelper(context: Context, name: String) : DaoMaster.OpenHelper(context, name) {
 
     override fun onUpgrade(db: Database, oldVersion: Int, newVersion: Int) {
-        Log.d(
-            TAG,
+        Timber.d(
             "Upgrading schema from version $oldVersion to $newVersion by dropping all tables"
         )
         dropAllTables(db, true)
