@@ -63,6 +63,9 @@ dependencies {
     // log
     implementation "com.jakewharton.timber:timber:$timber_version"
 
+    // greendao database
+    implementation "org.greenrobot:greendao:$greendao_version"
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"

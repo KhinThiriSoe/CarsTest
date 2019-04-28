@@ -19,18 +19,14 @@ constructor(var repository: ArticleRepository) : ArticleContract.Presenter {
     private var disposable: CompositeDisposable? = null
 
     override fun fetchArticleLists() {
+        if (view != null) view?.showProgress()
         repository.getArticleLists()
             .subscribeOn(Schedulers.io())
-            .doOnSubscribe {
-                if (view != null) view?.showProgress()
-            }
             .observeOn(AndroidSchedulers.mainThread())
-            .doFinally {
-                view?.hideProgress()
-            }
             .subscribe(object : SingleObserver<Article> {
                 override fun onSuccess(response: Article) {
                     view?.showArticleLists(response)
+                    view?.hideProgress()
                 }
 
                 override fun onSubscribe(d: Disposable) {

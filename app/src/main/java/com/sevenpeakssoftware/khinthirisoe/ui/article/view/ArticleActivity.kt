@@ -59,7 +59,7 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
     override fun showArticleLists(article: Article) {
 
-        articleAdapter?.setContent(article.content as MutableList<Content>)
+        articleAdapter?.setContent(article.content as ArrayList<Content>)
         recycler_article.adapter = articleAdapter
     }
 
