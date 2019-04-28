@@ -1,11 +1,7 @@
 package com.sevenpeakssoftware.khinthirisoe.utils
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 object DateUtils {
@@ -35,7 +31,6 @@ object DateUtils {
         return result
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun checkDate(contentDateTime: String): String {
 
         val year = Calendar.getInstance().get(Calendar.YEAR)
@@ -44,14 +39,10 @@ object DateUtils {
         val time =
             contentDateTime.substring(contentDateTime.indexOf(' '), contentDateTime.length)
 
-        val contentYear = LocalDate
-            .parse(
-                date,
-                DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.US)
-            )
-            .year
+        val dateParts = date.split(".")
+        val contentYear = dateParts[2]
 
-        return if (year == contentYear) {
+        return if (year == contentYear.toInt()) {
             val newDate =
                 changeDateFormat("dd.MM.yyyy hh:mm", "dd LLLL ", contentDateTime)
             "$newDate $time"
