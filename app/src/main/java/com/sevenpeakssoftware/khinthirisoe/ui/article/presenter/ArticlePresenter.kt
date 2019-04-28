@@ -18,7 +18,7 @@ constructor(var repository: ArticleRepository) : ArticleContract.Presenter {
     private var view: ArticleContract.View? = null
     private var disposable: CompositeDisposable? = null
 
-    override fun fetchLists() {
+    override fun fetchArticleLists() {
         repository.getArticleLists()
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {
@@ -30,7 +30,7 @@ constructor(var repository: ArticleRepository) : ArticleContract.Presenter {
             }
             .subscribe(object : SingleObserver<Article> {
                 override fun onSuccess(response: Article) {
-                    view?.showLists(response)
+                    view?.showArticleLists(response)
                 }
 
                 override fun onSubscribe(d: Disposable) {

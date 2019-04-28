@@ -40,7 +40,7 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
     private fun fetchData() {
         if (NetworkUtils.hasNetwork(this))
-            presenter.fetchLists()
+            presenter.fetchArticleLists()
     }
 
     private fun initView() {
@@ -56,7 +56,7 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
     }
 
-    override fun showLists(article: Article) {
+    override fun showArticleLists(article: Article) {
 
         articleAdapter?.setContent(article.content as MutableList<Content>)
         recycler_car_item.adapter = articleAdapter

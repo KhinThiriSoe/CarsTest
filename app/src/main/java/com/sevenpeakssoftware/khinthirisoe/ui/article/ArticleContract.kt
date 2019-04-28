@@ -8,13 +8,13 @@ class ArticleContract {
 
     interface View : BaseView {
 
-        fun showLists(article: Article)
+        fun showArticleLists(article: Article)
 
         fun showMessage(message: String)
     }
 
     interface Presenter : BasePresenter<View> {
 
-        fun fetchLists()
+        fun fetchArticleLists()
     }
 }
