@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sevenpeakssoftware.khinthirisoe.R
+import com.sevenpeakssoftware.khinthirisoe.data.db.model.ArticleContent
 import com.sevenpeakssoftware.khinthirisoe.di.App
 import com.sevenpeakssoftware.khinthirisoe.di.component.AppComponent
 import com.sevenpeakssoftware.khinthirisoe.di.component.DaggerActivityComponent
@@ -37,12 +38,11 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
         initView()
 
-        fetchData()
-    }
-
-    private fun fetchData() {
-        if (NetworkUtils.hasNetwork(this))
-            presenter.fetchArticleLists()
+        if (NetworkUtils.hasNetwork(this)) {
+            fetchDataFromServer()
+        } else {
+            fetchDataFromDatabase()
+        }
     }
 
     private fun initView() {
@@ -57,10 +57,40 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
     }
 
+    private fun fetchDataFromServer() {
+        presenter.fetchArticleLists()
+    }
+
+    private fun fetchDataFromDatabase() {
+
+        val contents = App.mDaoSession!!.articleContentDao.queryBuilder().list()
+
+
+
+    }
+
     override fun showArticleLists(article: Article) {
 
         articleAdapter?.setContent(article.content as ArrayList<Content>)
         recycler_article.adapter = articleAdapter
+
+        saveArticle(article)
+    }
+
+    private fun saveArticle(article: Article) {
+
+        for (content in article.content) {
+            App.mDaoSession?.articleContentDao?.insertOrReplace(
+                ArticleContent(
+                    content.id,
+                    content.title,
+                    content.dateTime,
+                    content.ingress,
+                    content.image
+                )
+            )
+        }
+
     }
 
     override fun showMessage(message: String) {
