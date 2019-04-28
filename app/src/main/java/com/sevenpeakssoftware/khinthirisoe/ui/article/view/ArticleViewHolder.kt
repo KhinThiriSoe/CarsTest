@@ -19,7 +19,7 @@ class ArticleViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
         GlideApp.with(itemView.context)
             .load(content.image)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .placeholder(R.drawable.ic_launcher_background)
             .into(itemView.img_car)
 

@@ -6,6 +6,8 @@ import java.util.*
 
 object DateUtils {
 
+    var currentFormat = "dd.MM.yyyy hh:mm"
+
     private fun changeDateFormat(
         currentFormat: String,
         requiredFormat: String,
@@ -16,6 +18,7 @@ object DateUtils {
         if (dateString.isEmpty()) {
             return result
         }
+
         val oldDateFormat = SimpleDateFormat(currentFormat, Locale.getDefault())
         val newDateFormat = SimpleDateFormat(requiredFormat, Locale.getDefault())
         var date: Date? = null
@@ -44,12 +47,12 @@ object DateUtils {
 
         return if (year == contentYear.toInt()) {
             val newDate =
-                changeDateFormat("dd.MM.yyyy hh:mm", "dd LLLL ", contentDateTime)
+                changeDateFormat(currentFormat, "dd LLLL", contentDateTime)
             "$newDate $time"
 
         } else {
             val newDate =
-                changeDateFormat("dd.MM.yyyy hh:mm", "dd LLLL yyyy", contentDateTime)
+                changeDateFormat(currentFormat, "dd LLLL yyyy", contentDateTime)
             "$newDate $time"
         }
 
