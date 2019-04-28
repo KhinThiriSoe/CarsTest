@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_car"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            android:foreground="@drawable/gradient_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:paddingLeft="@dimen/standard_margin"
+            android:paddingRight="@dimen/standard_margin"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Q7 - Greatness starts, when you don't stop." />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/standard_margin"
+        android:paddingRight="@dimen/standard_margin"
+        android:paddingBottom="@dimen/standard_margin">
+
+        <TextView
+            android:id="@+id/txt_datetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/standard_margin"
+            android:textColor="@color/colorPrimaryLight"
+            tools:text="29 November 2017 15:13" />
+
+        <TextView
+            android:id="@+id/txt_ingress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            tools:text="The Audi Q7 is the result of an ambitious idea: never cease to improve." />
+
+    </LinearLayout>
+
+</LinearLayout>

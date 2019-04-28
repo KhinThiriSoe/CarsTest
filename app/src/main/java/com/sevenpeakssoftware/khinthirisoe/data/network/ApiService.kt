@@ -1,5 +1,6 @@
 package com.sevenpeakssoftware.khinthirisoe.data.network
 
+import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Article
 import io.reactivex.Single
 import retrofit2.http.GET
 
