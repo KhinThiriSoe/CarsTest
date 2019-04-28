@@ -1,6 +1,7 @@
 package com.sevenpeakssoftware.khinthirisoe.ui.article.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sevenpeakssoftware.khinthirisoe.R
 import com.sevenpeakssoftware.khinthirisoe.di.App
@@ -13,6 +14,7 @@ import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Content
 import com.sevenpeakssoftware.khinthirisoe.ui.base.BaseActivity
 import com.sevenpeakssoftware.khinthirisoe.utils.NetworkUtils
 import kotlinx.android.synthetic.main.activity_article.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class ArticleActivity : BaseActivity(), ArticleContract.View {
@@ -48,31 +50,28 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
         supportActionBar?.title = getString(R.string.toolbar_title)
 
         val layoutManager = LinearLayoutManager(this)
-
-        recycler_car_item.layoutManager = layoutManager
+        recycler_article.layoutManager = layoutManager
 
         articleAdapter = ArticleAdapter(null)
-        recycler_car_item.adapter = articleAdapter
+        recycler_article.adapter = articleAdapter
 
     }
 
     override fun showArticleLists(article: Article) {
 
         articleAdapter?.setContent(article.content as MutableList<Content>)
-        recycler_car_item.adapter = articleAdapter
+        recycler_article.adapter = articleAdapter
     }
 
     override fun showMessage(message: String) {
+        Timber.tag(message)
     }
 
     override fun showProgress() {
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-    }
-
-    companion object {
-
-        val TAG = ArticleActivity::class.java.simpleName
+        progressBar.visibility = View.GONE
     }
 }

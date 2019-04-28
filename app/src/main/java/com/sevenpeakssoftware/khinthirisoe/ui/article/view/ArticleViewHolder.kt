@@ -7,7 +7,7 @@ import com.sevenpeakssoftware.khinthirisoe.ui.GlideApp
 import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Content
 import com.sevenpeakssoftware.khinthirisoe.ui.base.BaseViewHolder
 import com.sevenpeakssoftware.khinthirisoe.utils.DateUtils
-import kotlinx.android.synthetic.main.item_article.view.*
+import kotlinx.android.synthetic.main.list_article.view.*
 
 class ArticleViewHolder(itemView: View) : BaseViewHolder(itemView) {
 

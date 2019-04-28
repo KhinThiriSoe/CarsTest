@@ -7,11 +7,11 @@ import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Content
 import com.sevenpeakssoftware.khinthirisoe.ui.base.inflate
 
 class ArticleAdapter(
-    private var contentLists: MutableList<Content>?
+    private var contentLists: ArrayList<Content>?
 ) : RecyclerView.Adapter<ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        return ArticleViewHolder(parent.inflate(R.layout.item_article))
+        return ArticleViewHolder(parent.inflate(R.layout.list_article))
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -28,7 +28,7 @@ class ArticleAdapter(
         }
     }
 
-    fun setContent(content: MutableList<Content>) {
+    fun setContent(content: ArrayList<Content>) {
         this.contentLists = content
         notifyDataSetChanged()
     }
