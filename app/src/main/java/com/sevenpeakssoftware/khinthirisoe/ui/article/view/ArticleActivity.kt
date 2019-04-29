@@ -3,6 +3,7 @@ package com.sevenpeakssoftware.khinthirisoe.ui.article.view
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
 import com.sevenpeakssoftware.khinthirisoe.R
 import com.sevenpeakssoftware.khinthirisoe.data.db.model.ArticleContent
 import com.sevenpeakssoftware.khinthirisoe.di.App
@@ -12,7 +13,9 @@ import com.sevenpeakssoftware.khinthirisoe.di.module.ActivityModule
 import com.sevenpeakssoftware.khinthirisoe.ui.article.ArticleContract
 import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Article
 import com.sevenpeakssoftware.khinthirisoe.ui.base.BaseActivity
-import com.sevenpeakssoftware.khinthirisoe.utils.NetworkUtils
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_article.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -23,6 +26,8 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
     lateinit var presenter: ArticleContract.Presenter
 
     private var articleAdapter: ArticleAdapter? = null
+
+    private var connectivityDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun setupComponent(appComponent: AppComponent) {
         val component = DaggerActivityComponent.builder().appComponent(App.appComponent)
@@ -37,11 +42,7 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
         initView()
 
-        if (NetworkUtils.hasNetwork(this)) {
-            fetchDataFromServer()
-        } else {
-            fetchDataFromDatabase()
-        }
+        fetchArticles()
     }
 
     private fun initView() {
@@ -54,6 +55,27 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
         articleAdapter = ArticleAdapter(null)
         recycler_article.adapter = articleAdapter
 
+    }
+
+    private fun fetchArticles() {
+
+        connectivityDisposable.add(
+            ReactiveNetwork
+                .observeNetworkConnectivity(applicationContext)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ connectivity ->
+                    if (connectivity.available()) {
+                        txt_no_internet.visibility = View.GONE
+                        fetchDataFromServer()
+                    } else {
+                        txt_no_internet.visibility = View.VISIBLE
+                        fetchDataFromDatabase()
+                    }
+                }, { throwable ->
+                    Timber.d(throwable.localizedMessage)
+                })
+        )
     }
 
     private fun fetchDataFromServer() {

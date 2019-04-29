@@ -71,6 +71,9 @@ dependencies {
     // greendao database
     implementation "org.greenrobot:greendao:$greendao_version"
 
+    //check internet connection
+    implementation "com.github.pwittchen:reactivenetwork-rx2:$reactiveNetwork_version"
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test:runner:$runner_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
