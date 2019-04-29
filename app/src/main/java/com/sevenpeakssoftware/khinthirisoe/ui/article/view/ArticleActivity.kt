@@ -11,7 +11,6 @@ import com.sevenpeakssoftware.khinthirisoe.di.component.DaggerActivityComponent
 import com.sevenpeakssoftware.khinthirisoe.di.module.ActivityModule
 import com.sevenpeakssoftware.khinthirisoe.ui.article.ArticleContract
 import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Article
-import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Content
 import com.sevenpeakssoftware.khinthirisoe.ui.base.BaseActivity
 import com.sevenpeakssoftware.khinthirisoe.utils.NetworkUtils
 import kotlinx.android.synthetic.main.activity_article.*
@@ -63,34 +62,38 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
     private fun fetchDataFromDatabase() {
 
+        progressBar.visibility = View.VISIBLE
+
         val contents = App.mDaoSession!!.articleContentDao.queryBuilder().list()
 
+        articleAdapter?.setContent(contents as MutableList<ArticleContent>)
+        recycler_article.adapter = articleAdapter
 
+        progressBar.visibility = View.GONE
 
     }
 
     override fun showArticleLists(article: Article) {
-
-        articleAdapter?.setContent(article.content as ArrayList<Content>)
-        recycler_article.adapter = articleAdapter
 
         saveArticle(article)
     }
 
     private fun saveArticle(article: Article) {
 
-        for (content in article.content) {
-            App.mDaoSession?.articleContentDao?.insertOrReplace(
-                ArticleContent(
-                    content.id,
-                    content.title,
-                    content.dateTime,
-                    content.ingress,
-                    content.image
+        if (article.status == "success") {
+            for (content in article.content) {
+                App.mDaoSession?.articleContentDao?.insertOrReplace(
+                    ArticleContent(
+                        content.id,
+                        content.title,
+                        content.dateTime,
+                        content.ingress,
+                        content.image
+                    )
                 )
-            )
+            }
         }
-
+        fetchDataFromDatabase()
     }
 
     override fun showMessage(message: String) {

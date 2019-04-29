@@ -3,11 +3,11 @@ package com.sevenpeakssoftware.khinthirisoe.ui.article.view
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenpeakssoftware.khinthirisoe.R
-import com.sevenpeakssoftware.khinthirisoe.ui.article.model.Content
+import com.sevenpeakssoftware.khinthirisoe.data.db.model.ArticleContent
 import com.sevenpeakssoftware.khinthirisoe.ui.base.inflate
 
 class ArticleAdapter(
-    private var contentLists: ArrayList<Content>?
+    private var contentLists: MutableList<ArticleContent>?
 ) : RecyclerView.Adapter<ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -28,7 +28,7 @@ class ArticleAdapter(
         }
     }
 
-    fun setContent(content: ArrayList<Content>) {
+    fun setContent(content: MutableList<ArticleContent>) {
         this.contentLists = content
         notifyDataSetChanged()
     }
