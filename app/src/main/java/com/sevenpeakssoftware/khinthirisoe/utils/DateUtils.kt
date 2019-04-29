@@ -19,8 +19,16 @@ object DateUtils {
             return result
         }
 
-        val oldDateFormat = SimpleDateFormat(currentFormat, Locale.getDefault())
-        val newDateFormat = SimpleDateFormat(requiredFormat, Locale.getDefault())
+        val oldDateFormat = SimpleDateFormat(
+            currentFormat,
+            Locale.getDefault()
+        )
+
+        val newDateFormat = SimpleDateFormat(
+            requiredFormat,
+            Locale.getDefault()
+        )
+
         var date: Date? = null
         try {
             date = oldDateFormat.parse(dateString)
@@ -38,22 +46,35 @@ object DateUtils {
 
         val year = Calendar.getInstance().get(Calendar.YEAR)
 
-        val date = contentDateTime.substring(0, contentDateTime.indexOf(' '))
-        val time =
-            contentDateTime.substring(contentDateTime.indexOf(' '), contentDateTime.length)
+        val date = contentDateTime.substring(
+            0,
+            contentDateTime.indexOf(' ')
+        )
+
+        val time = contentDateTime.substring(
+            contentDateTime.indexOf(' '),
+            contentDateTime.length
+        )
 
         val dateParts = date.split(".")
         val contentYear = dateParts[2]
 
         return if (year == contentYear.toInt()) {
-            val newDate =
-                changeDateFormat(currentFormat, "dd LLLL", contentDateTime)
-            "$newDate $time"
+            val newDate = changeDateFormat(
+                currentFormat,
+                "dd LLLL",
+                contentDateTime
+            )
+            "$newDate, $time"
 
         } else {
             val newDate =
-                changeDateFormat(currentFormat, "dd LLLL yyyy", contentDateTime)
-            "$newDate $time"
+                changeDateFormat(
+                    currentFormat,
+                    "dd LLLL yyyy",
+                    contentDateTime
+                )
+            "$newDate, $time"
         }
 
     }
