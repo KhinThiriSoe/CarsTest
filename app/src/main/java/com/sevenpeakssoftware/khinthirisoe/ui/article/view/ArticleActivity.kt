@@ -84,14 +84,10 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
 
     private fun fetchDataFromDatabase() {
 
-        progressBar.visibility = View.VISIBLE
-
         val contents = App.mDaoSession!!.articleContentDao.queryBuilder().list()
 
         articleAdapter?.setContent(contents as MutableList<ArticleContent>)
         recycler_article.adapter = articleAdapter
-
-        progressBar.visibility = View.GONE
 
     }
 
