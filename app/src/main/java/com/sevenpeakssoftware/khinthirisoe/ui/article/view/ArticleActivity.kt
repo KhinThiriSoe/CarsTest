@@ -129,4 +129,14 @@ class ArticleActivity : BaseActivity(), ArticleContract.View {
     override fun hideProgress() {
         progressBar.visibility = View.GONE
     }
+
+    override fun onPause() {
+        super.onPause()
+        connectivityDisposable.dispose()
+    }
+
+    override fun onDestroy() {
+        connectivityDisposable.clear()
+        super.onDestroy()
+    }
 }
