@@ -16,7 +16,7 @@ class ArticlePresenter @Inject
 constructor(var repository: ArticleRepository) : ArticleContract.Presenter {
 
     private var view: ArticleContract.View? = null
-    private var disposable: CompositeDisposable? = null
+    private var disposable: CompositeDisposable = CompositeDisposable()
 
     override fun fetchArticleLists() {
         if (view != null) view?.showProgress()
@@ -30,7 +30,7 @@ constructor(var repository: ArticleRepository) : ArticleContract.Presenter {
                 }
 
                 override fun onSubscribe(d: Disposable) {
-                    disposable?.add(d)
+                    disposable.add(d)
                 }
 
                 override fun onError(e: Throwable) {
@@ -51,7 +51,7 @@ constructor(var repository: ArticleRepository) : ArticleContract.Presenter {
     }
 
     override fun onDetachView() {
-        disposable?.clear()
+        disposable.clear()
         this.view = null
     }
 }
